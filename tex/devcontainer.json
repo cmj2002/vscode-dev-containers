@@ -1,14 +1,85 @@
 {
-	"name": "tex",
-	"image": "caomingjun/devcontainer:tex",
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-ceintl.vscode-language-pack-zh-hans",
+    "name": "tex",
+    "image": "caomingjun/devcontainer:tex",
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        // LaTeX
+        "latex-workshop.latex.autoBuild.run": "never",
+        "latex-workshop.message.error.show": true,
+        "latex-workshop.message.warning.show": false,
+        "latex-workshop.latex.tools": [
+            {
+                "name": "xelatex",
+                "command": "xelatex",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "%DOCFILE%"
+                ]
+            },
+            {
+                "name": "pdflatex",
+                "command": "pdflatex",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "%DOCFILE%"
+                ]
+            },
+            {
+                "name": "bibtex",
+                "command": "bibtex",
+                "args": [
+                    "%DOCFILE%"
+                ]
+            }
+        ],
+        "latex-workshop.latex.recipes": [
+            {
+                "name": "xelatex",
+                "tools": [
+                    "xelatex"
+                ]
+            },
+            {
+                "name": "pdflatex",
+                "tools": [
+                    "pdflatex"
+                ]
+            },
+            {
+                "name": "xe->bib->xe->xe",
+                "tools": [
+                    "xelatex",
+                    "bibtex",
+                    "xelatex",
+                    "xelatex"
+                ]
+            },
+            {
+                "name": "pdf->bib->pdf->pdf",
+                "tools": [
+                    "pdflatex",
+                    "bibtex",
+                    "pdflatex",
+                    "pdflatex"
+                ]
+            }
+        ],
+        "latex-workshop.view.pdf.viewer": "tab"
+        // "latex-workshop.view.pdf.external.viewer.command": "C:/Program Files (x86)/Adobe/Acrobat DC/Acrobat/Acrobat.exe",
+        // "latex-workshop.view.pdf.external.viewer.args": [
+        //     "%PDF%"
+        // ]
+    },
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "ms-ceintl.vscode-language-pack-zh-hans",
         "github.copilot",
         "james-yu.latex-workshop",
         "ms-python.python"
-	],
+    ],
     "remoteUser": "vscode"
 }
